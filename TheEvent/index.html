@@ -2,6 +2,85 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: red;
+            border-radius: 10px;
+        }
+
+
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b30000;
+        }
+
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -10,7 +89,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.ico" rel="icon">
+    <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -37,14 +116,14 @@
 
 <body>
 
-<!-- ======= Header ======= -->
+
 <header id="header">
     <div class="container">
 
         <div id="logo" class="pull-left">
             <!-- Uncomment below if you prefer to use a text logo -->
-            <!-- <h1><a href="#intro">The<span>Event</span></a></h1>-->
-            <a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>
+            <!-- <h1><a href="index.html">SIBA<span>&nbsp;MESS</span></a></h1
+            <--<a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>-->
         </div>
 
         <nav id="nav-menu-container">
@@ -57,9 +136,10 @@
                 <li><a href="#payments">Payments</a></li>
                 <li><a href="#messtimings">Timings</a></li>
                 <li><a href="#unitsdetails">Units Details</a></li>
-                <li><a href="#contactus">Mess Managers</a></li>
+                <li><a href="#messmanagers">Mess Managers</a></li>
+                <li><a href="#faq">FAQs</a></li>
                 <li><a href="#contactus">Contact Us</a></li>
-                <li><a href="#login" class="about-btn scrollto">Login</a></li>
+                <li> <a href="#login" class="btn btn-danger btn-sm">Login</a></li>
             </ul>
         </nav><!-- #nav-menu-container -->
     </div>
@@ -89,18 +169,18 @@
 
                 </div>
                 <div class="col-lg-3">
-                    <h3 style="margin-top: 30px; margin-right: 100px">Helper</h3>
-                    <label>Name: </label>&nbsp <input type="text" name="name"><br>
+                    <h3 style="margin-top: 33px; margin-right: 10px">Helper</h3>
+                    <label style="margin-top: 7%">Name: </label>&nbsp <input type="text" name="name"><br>
                     <label>Phone: </label> <input type="text" name="Phone"><br>
                 </div>
 
                 <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
 
-                    <a class="about-btn scrollto">Edit</a>
+                    <a  style="margin-top: 60%" class="btn btn-danger btn-sm">Edit</a>
 
                 </div>
             </div>
-            </div>
+        </div>
     </section><!-- End About Section -->
 
     <!-- ======= Speakers Section ======= -->
@@ -189,14 +269,14 @@
                         <td th:text="${category.categoryName}"></td>
                         <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
                                class="btn btn-primary btn-sm">Edit</a></td>
-                        <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
-                               class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a    th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
+                                  class="btn btn-danger btn-sm" >Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
+    </section>
     <!-- ======= Venue Section ======= -->
     <section id="onoff">
         <div class="container-fluid" data-aos="fade-up">
@@ -204,6 +284,7 @@
                 <h2>Student mess ON/OFF status</h2>
                 <p>All the following students are able to do the mess today</p>
             </div>
+
             <div class="col-sm-12 table-responsive">
                 <table class="table table-hover table-striped" style="font-size: small;overflow-x: scroll;">
                     <thead>
@@ -225,16 +306,17 @@
                         <td th:text="${category.categoryName}"></td>
                         <td th:text="${category.categoryName}"></td>
                         <td th:text="${category.categoryName}"></td>
-                        <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
-                               class="btn btn-primary btn-sm">Edit</a></td>
+                        <td><a  th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
+                                class="btn btn-primary btn-sm"  >Edit</a></td>
                         <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
-                               class="btn btn-danger btn-sm">Delete</a></td>
+                               class="btn btn-danger btn-sm"  >Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
     <section id="payments">
         <div class="container-fluid" data-aos="fade-up">
             <div class="section-header">
@@ -266,28 +348,98 @@
                         <td th:text="${category.categoryName}"></td>
                         <td th:text="${category.categoryName}"></td>
                         <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
-                               class="btn btn-primary btn-sm">Edit</a></td>
+                               class="btn btn-primary btn-sm"  >Edit</a></td>
                         <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
-                               class="btn btn-danger btn-sm">Delete</a></td>
+                               class="btn btn-danger btn-sm"  >Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        </section>
-        <section id="messtimings">
+    </section>
+    <section id="messtimings">
+        <div class="section-header">
+            <h2>Mess Timings</h2>
+            <p>No one will be entertain without below timings</p>
+        </div>
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-hover table-striped" style="font-size: small;overflow-x: scroll;">
+                <thead>
+                <tr style="height: fit-content;">
+                    <th scope="col">Breakfast Time</th>
+                    <th scope="col">Lunch Time</th>
+                    <th scope="col">Dinner Time</th>
+                    <th scope="col">Brunch Time only sunday</th>
+
+
+                    <th scope="col" colspan="2">Operations</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category: ${listCategories}">
+                    <td th:text="${category.categoryId}"></td>
+                    <td th:text="${category.categoryName}"></td>
+                    <td th:text="${category.categoryName}"></td>
+                    <td th:text="${category.categoryName}"></td>
+                    <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
+                           class="btn btn-primary btn-sm"  >Edit</a></td>
+                    <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
+                           class="btn btn-danger btn-sm"  >Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="unitsdetails">
+        <div class="container-fluid" data-aos="fade-up">
             <div class="section-header">
-                <h2>Mess Timings</h2>
-                <p>No one will be entertain without below timings</p>
+                <h2>Students Units Details</h2>
+                <p>Detiled day by day units and total units are shown</p>
             </div>
             <div class="col-sm-12 table-responsive">
                 <table class="table table-hover table-striped" style="font-size: small;overflow-x: scroll;">
                     <thead>
                     <tr style="height: fit-content;">
-                        <th scope="col">Breakfast Time</th>
-                        <th scope="col">Lunch Time</th>
-                        <th scope="col">Dinner Time</th>
-                        <th scope="col">Brunch Time only sunday</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">01</th>
+                        <th scope="col">02</th>
+                        <th scope="col">03</th>
+                        <th scope="col">04</th>
+                        <th scope="col">05</th>
+                        <th scope="col">06</th>
+                        <th scope="col">07</th>
+                        <th scope="col">08</th>
+                        <th scope="col">09</th>
+                        <th scope="col">10</th>
+                        <th scope="col">11</th>
+                        <th scope="col">12</th>
+                        <th scope="col">13</th>
+                        <th scope="col">14</th>
+                        <th scope="col">15</th>
+                        <th scope="col">16</th>
+                        <th scope="col">17</th>
+                        <th scope="col">18</th>
+                        <th scope="col">19</th>
+                        <th scope="col">20</th>
+                        <th scope="col">21</th>
+                        <th scope="col">22</th>
+                        <th scope="col">23</th>
+                        <th scope="col">24</th>
+                        <th scope="col">25</th>
+                        <th scope="col">26</th>
+                        <th scope="col">27</th>
+                        <th scope="col">28</th>
+                        <th scope="col">29</th>
+                        <th scope="col">30</th>
+                        <th scope="col">31</th>
+                        <th scope="col">Total Units</th>
+
+
+
+
+
 
 
                         <th scope="col" colspan="2">Operations</th>
@@ -300,215 +452,52 @@
                         <td th:text="${category.categoryName}"></td>
                         <td th:text="${category.categoryName}"></td>
                         <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.categoryName}"></td>
                         <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
-                               class="btn btn-primary btn-sm">Edit</a></td>
+                               class="btn btn-primary btn-sm"  >Edit</a></td>
                         <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
-                               class="btn btn-danger btn-sm">Delete</a></td>
+                               class="btn btn-danger btn-sm"  >Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
-
-        <section id="unitsdetails">
-            <div class="container-fluid" data-aos="fade-up">
-                <div class="section-header">
-                    <h2>Students Units Details</h2>
-                    <p>Detiled day by day units and total units are shown</p>
-                </div>
-                <div class="col-sm-12 table-responsive">
-                    <table class="table table-hover table-striped" style="font-size: small;overflow-x: scroll;">
-                        <thead>
-                        <tr style="height: fit-content;">
-                            <th scope="col">Name</th>
-                            <th scope="col">01</th>
-                            <th scope="col">02</th>
-                            <th scope="col">03</th>
-                            <th scope="col">04</th>
-                            <th scope="col">05</th>
-                            <th scope="col">06</th>
-                            <th scope="col">07</th>
-                            <th scope="col">08</th>
-                            <th scope="col">09</th>
-                            <th scope="col">10</th>
-                            <th scope="col">11</th>
-                            <th scope="col">12</th>
-                            <th scope="col">13</th>
-                            <th scope="col">14</th>
-                            <th scope="col">15</th>
-                            <th scope="col">16</th>
-                            <th scope="col">17</th>
-                            <th scope="col">18</th>
-                            <th scope="col">19</th>
-                            <th scope="col">20</th>
-                            <th scope="col">21</th>
-                            <th scope="col">22</th>
-                            <th scope="col">23</th>
-                            <th scope="col">24</th>
-                            <th scope="col">25</th>
-                            <th scope="col">26</th>
-                            <th scope="col">27</th>
-                            <th scope="col">28</th>
-                            <th scope="col">29</th>
-                            <th scope="col">30</th>
-                            <th scope="col">31</th>
-                            <th scope="col">Total Units</th>
-
-
-
-
-
-
-
-                            <th scope="col" colspan="2">Operations</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="category: ${listCategories}">
-                            <td th:text="${category.categoryId}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td th:text="${category.categoryName}"></td>
-                            <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
-                                   class="btn btn-primary btn-sm">Edit</a></td>
-                            <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
-                                   class="btn btn-danger btn-sm">Delete</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-            <h1 style="margin-bottom: 80%"></h1>
         </div>
-        <div class="row no-gutters">
-                <div class="col-lg-6 venue-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-                            frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
-                <div class="col-lg-6 venue-info">
-                    <div class="row justify-content-center">
-                        <div class="col-11 col-lg-8">
-                            <h3>Downtown Conference Center, New York</h3>
-                            <p>Iste nobis eum sapiente sunt enim dolores labore accusantium autem. Cumque beatae ipsam.
-                                Est quae sit qui voluptatem corporis velit. Qui maxime accusamus possimus. Consequatur
-                                sequi et ea suscipit enim nesciunt quia velit.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="container-fluid venue-gallery-container" data-aos="fade-up" data-aos-delay="100">
-            <div class="row no-gutters">
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/1.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/1.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/2.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/2.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/3.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/3.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/4.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/4.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/5.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/5.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/6.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/6.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/7.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="venue-gallery">
-                        <a href="assets/img/venue-gallery/8.jpg" class="venobox" data-gall="venue-gallery">
-                            <img src="assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </section><!-- End Venue Section -->
-
+    </section>
     <!-- ======= Hotels Section ======= -->
-    <section id="hotels" class="section-with-bg">
+    <section id="messmanagers" class="section-with-bg">
 
         <div class="container" data-aos="fade-up">
             <div class="section-header">
-                <h2>Hotels</h2>
-                <p>Her are some nearby hotels</p>
+                <h2>Mess Managers</h2>
+                <p>Current Mess Managers are show below hotels</p>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -518,15 +507,9 @@
                         <div class="hotel-img">
                             <img src="assets/img/hotels/1.jpg" alt="Hotel 1" class="img-fluid">
                         </div>
-                        <h3><a href="#">Hotel 1</a></h3>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>0.4 Mile from the Venue</p>
+                        <h3><a href="#">ABC</a></h3>
+
+                        <p>Room No.x</p>
                     </div>
                 </div>
 
@@ -535,15 +518,8 @@
                         <div class="hotel-img">
                             <img src="assets/img/hotels/2.jpg" alt="Hotel 2" class="img-fluid">
                         </div>
-                        <h3><a href="#">Hotel 2</a></h3>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                        </div>
-                        <p>0.5 Mile from the Venue</p>
+                        <h3><a href="#">XYZ</a></h3>
+                        <p>Room  No.y</p>
                     </div>
                 </div>
 
@@ -552,14 +528,9 @@
                         <div class="hotel-img">
                             <img src="assets/img/hotels/3.jpg" alt="Hotel 3" class="img-fluid">
                         </div>
-                        <h3><a href="#">Hotel 3</a></h3>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>0.6 Mile from the Venue</p>
+                        <h3><a href="#">Hostel Warden</a></h3>
+
+                        <p>PHONE.1111</p>
                     </div>
                 </div>
 
@@ -568,100 +539,6 @@
 
     </section><!-- End Hotels Section -->
 
-    <!-- ======= Gallery Section ======= -->
-    <section id="gallery">
-
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Gallery</h2>
-                <p>Check our gallery from the recent events</p>
-            </div>
-        </div>
-
-        <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
-            <a href="assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/1.jpg" alt=""></a>
-            <a href="assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/2.jpg" alt=""></a>
-            <a href="assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/3.jpg" alt=""></a>
-            <a href="assets/img/gallery/4.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/4.jpg" alt=""></a>
-            <a href="assets/img/gallery/5.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/5.jpg" alt=""></a>
-            <a href="assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/6.jpg" alt=""></a>
-            <a href="assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/7.jpg" alt=""></a>
-            <a href="assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img
-                    src="assets/img/gallery/8.jpg" alt=""></a>
-        </div>
-
-    </section><!-- End Gallery Section -->
-
-    <!-- ======= Supporters Section ======= -->
-    <section id="gal" class="section-with-bg">
-
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Sponsors</h2>
-            </div>
-
-            <div class="row no-gutters supporters-wrap clearfix" data-aos="zoom-in" data-aos-delay="100">
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/1.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/2.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/3.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/4.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/5.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/6.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/7.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="assets/img/supporters/8.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section><!-- End Sponsors Section -->
 
     <!-- =======  F.A.Q Section ======= -->
     <section id="faq">
@@ -669,7 +546,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-header">
-                <h2>F.A.Q </h2>
+                <h2>F.A.Q.s </h2>
             </div>
 
             <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -677,8 +554,8 @@
                     <ul id="faq-list">
 
                         <li>
-                            <a data-toggle="collapse" class="collapsed" href="#faq1">Non consectetur a erat nam at
-                                lectus urna duis? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" class="collapsed" href="#faq1">Are outsiders allowed here to mess?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq1" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet
@@ -689,8 +566,8 @@
                         </li>
 
                         <li>
-                            <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi
-                                enim nunc faucibus a pellentesque? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" href="#faq2" class="collapsed">What are the extra-units for one guest?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq2" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
@@ -702,8 +579,8 @@
                         </li>
 
                         <li>
-                            <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur
-                                adipiscing elit pellentesque habitant morbi? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" href="#faq3" class="collapsed">How can i close my mess permanently?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq3" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus
@@ -715,8 +592,8 @@
                         </li>
 
                         <li>
-                            <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus.
-                                Aliquam eleifend mi in nulla? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" href="#faq4" class="collapsed">What if my units are entered incorrectly?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq4" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
@@ -728,8 +605,8 @@
                         </li>
 
                         <li>
-                            <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam
-                                aliquam sem et tortor consequat? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" href="#faq5" class="collapsed">Can i edit my units?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq5" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in
@@ -740,8 +617,8 @@
                         </li>
 
                         <li>
-                            <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare.
-                                Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="fa fa-minus-circle"></i></a>
+                            <a data-toggle="collapse" href="#faq6" class="collapsed">How can i check my daily units?
+                                <i class="fa fa-minus-circle"></i></a>
                             <div id="faq6" class="collapse" data-parent="#faq-list">
                                 <p>
                                     Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
@@ -761,160 +638,10 @@
 
     </section><!-- End  F.A.Q Section -->
 
-    <!-- ======= Subscribe Section ======= -->
-    <section id="subscribe">
-        <div class="container" data-aos="zoom-in">
-            <div class="section-header">
-                <h2>Newsletter</h2>
-                <p>Rerum numquam illum recusandae quia mollitia consequatur.</p>
-            </div>
-
-            <form method="POST" action="#">
-                <div class="form-row justify-content-center">
-                    <div class="col-auto">
-                        <input type="text" class="form-control" placeholder="Enter your Email">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit">Subscribe</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </section><!-- End Subscribe Section -->
-
-    <!-- ======= Buy Ticket Section ======= -->
-    <section id="buy-tickets" class="section-with-bg">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <h2>Buy Tickets</h2>
-                <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card mb-5 mb-lg-0">
-                        <div class="card-body">
-                            <h5 class="card-title text-muted text-uppercase text-center">Standard Access</h5>
-                            <h6 class="card-price text-center">$150</h6>
-                            <hr>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Community
-                                    Access
-                                </li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Workshop
-                                    Access
-                                </li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>After Party
-                                </li>
-                            </ul>
-                            <hr>
-                            <div class="text-center">
-                                <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal"
-                                        data-ticket-type="standard-access">Buy Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card mb-5 mb-lg-0">
-                        <div class="card-body">
-                            <h5 class="card-title text-muted text-uppercase text-center">Pro Access</h5>
-                            <h6 class="card-price text-center">$250</h6>
-                            <hr>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Workshop
-                                    Access
-                                </li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>After Party
-                                </li>
-                            </ul>
-                            <hr>
-                            <div class="text-center">
-                                <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal"
-                                        data-ticket-type="pro-access">Buy Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Pro Tier -->
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-muted text-uppercase text-center">Premium Access</h5>
-                            <h6 class="card-price text-center">$350</h6>
-                            <hr>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Workshop Access</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>After Party</li>
-                            </ul>
-                            <hr>
-                            <div class="text-center">
-                                <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal"
-                                        data-ticket-type="premium-access">Buy Now
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Modal Order Form -->
-        <div id="buy-ticket-modal" class="modal fade">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Buy Tickets</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="#">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="your-name" placeholder="Your Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="your-email" placeholder="Your Email">
-                            </div>
-                            <div class="form-group">
-                                <select id="ticket-type" name="ticket-type" class="form-control">
-                                    <option value="">-- Select Your Ticket Type --</option>
-                                    <option value="standard-access">Standard Access</option>
-                                    <option value="pro-access">Pro Access</option>
-                                    <option value="premium-access">Premium Access</option>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn">Buy Now</button>
-                            </div>
-                        </form>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-    </section><!-- End Buy Ticket Section -->
+    <!-- ======= Subscribe Section ======= --><h1 style="margin-top: 10%"></h1>
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="section-bg">
+    <section id="contactus" class="section-bg">
 
         <div class="container" data-aos="fade-up">
 
@@ -928,8 +655,8 @@
                 <div class="col-md-4">
                     <div class="contact-address">
                         <i class="ion-ios-location-outline"></i>
-                        <h3>Address</h3>
-                        <address>A108 Adam Street, NY 535022, USA</address>
+                        <h3>Mess Manager 1</h3>
+                        <address>Mr. ABC</address>
                     </div>
                 </div>
 
@@ -944,111 +671,41 @@
                 <div class="col-md-4">
                     <div class="contact-email">
                         <i class="ion-ios-email-outline"></i>
-                        <h3>Email</h3>
-                        <p><a href="mailto:info@example.com">info@example.com</a></p>
+                        <h3>Room</h3>
+                        <p><a href="mailto:info@example.com">Room y. First Floor</a></p>
                     </div>
                 </div>
 
-            </div>
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="ion-ios-location-outline"></i>
+                        <h3>Mess Manager 2</h3>
+                        <address>Mr XYZ</address>
+                    </div>
+                </div>
 
-            <div class="form">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                   data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>
-                            <div class="validate"></div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                                   data-rule="email" data-msg="Please enter a valid email"/>
-                            <div class="validate"></div>
-                        </div>
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="ion-ios-telephone-outline"></i>
+                        <h3>Phone Number</h3>
+                        <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                               data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>
-                        <div class="validate"></div>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                  data-msg="Please write something for us" placeholder="Message"></textarea>
-                        <div class="validate"></div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit">Send Message</button>
-                    </div>
-                </form>
-            </div>
+                </div>
 
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="ion-ios-email-outline"></i>
+                        <h3>Room</h3>
+                        <p><a href="mailto:info@example.com">Room x Ground Floor</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    </section>   <!-- End Contact Section -->
+    </section><!-- End Contact Section -->
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-info">
-                    <img src="assets/img/logo.png" alt="TheEvenet">
-                    <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam
-                        porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In
-                        inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h4>Contact Us</h4>
-                    <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br>
-                        <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
-                    </p>
-
-                    <div class="social-links">
-                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                        <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <div class="copyright">

@@ -1001,54 +1001,54 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # Hotels Section
 --------------------------------------------------------------*/
-#hotels {
+#messmanagers {
   padding: 60px 0;
 }
 
-#hotels .hotel {
+#messmanagers .hotel {
   border: 1px solid #e0e5fa;
   background: #fff;
   margin-bottom: 30px;
 }
 
-#hotels .hotel:hover .hotel-img img {
+#messmanagers .hotel:hover .hotel-img img {
   transform: scale(1.1);
 }
 
-#hotels .hotel-img {
+#messmanagers .hotel-img {
   overflow: hidden;
   margin-bottom: 15px;
 }
 
-#hotels .hotel-img img {
+#messmanagers .hotel-img img {
   transition: 0.3s ease-in-out;
 }
 
-#hotels h3 {
+#messmanagers h3 {
   font-weight: 600;
   font-size: 20px;
   margin-bottom: 5px;
   padding: 0 20px;
 }
 
-#hotels a {
+#messmanagers a {
   color: #152b79;
 }
 
-#hotels a:hover {
+#messmanagers a:hover {
   color: #f82249;
 }
 
-#hotels .stars {
+#messmanagers .stars {
   padding: 0 20px;
   margin-bottom: 5px;
 }
 
-#hotels .stars i {
+#messmanagers .stars i {
   color: #ffc31d;
 }
 
-#hotels p {
+#messmanagers p {
   padding: 0 20px;
   margin-bottom: 20px;
   color: #060c22;
@@ -1195,7 +1195,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # Subscribe Section
 --------------------------------------------------------------*/
-#subscribe {
+#login {
   padding: 60px;
   background: url(../img/subscribe-bg.jpg) center center no-repeat;
   background-size: cover;
@@ -1203,7 +1203,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   position: relative;
 }
 
-#subscribe:before {
+#login:before {
   content: "";
   background: rgba(6, 12, 34, 0.6);
   position: absolute;
@@ -1214,16 +1214,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (min-width: 1024px) {
-  #subscribe {
+  #login {
     background-attachment: fixed;
   }
 }
 
-#subscribe .section-header h2, #subscribe p {
+#login .section-header h2, #login p {
   color: #fff;
 }
 
-#subscribe input {
+#login input {
   background: #fff;
   color: #060c22;
   border: 0;
@@ -1235,12 +1235,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (min-width: 767px) {
-  #subscribe input {
+  #login input {
     min-width: 400px;
   }
 }
 
-#subscribe button {
+#login button {
   border: 0;
   padding: 9px 25px;
   cursor: pointer;
@@ -1252,12 +1252,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   border-radius: 50px;
 }
 
-#subscribe button:hover {
+#login button:hover {
   background: #e0072f;
 }
 
 @media (max-width: 460px) {
-  #subscribe button {
+  #login button {
     margin-top: 10px;
   }
 }
