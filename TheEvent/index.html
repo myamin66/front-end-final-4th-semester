@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>TheEvent Bootstrap Template - Index</title>
+    <title>SIBA MESS</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -52,9 +52,11 @@
                 <li class="menu-active"><a href="index.html">Home</a></li>
                 <li><a href="#cookandhelper">Cook and Helpers</a></li>
                 <li><a href="#numbers">Numbers</a></li>
-                <li><a href="#menue">Menue</a></li>
+                <li><a href="#menu">Menu</a></li>
                 <li><a href="#onoff">ON/OFF</a></li>
-                <li><a href="#totalunits">Total Units</a></li>
+                <li><a href="#payments">Payments</a></li>
+                <li><a href="#messtimings">Timings</a></li>
+                <li><a href="#unitsdetails">Units Details</a></li>
                 <li><a href="#contactus">Mess Managers</a></li>
                 <li><a href="#contactus">Contact Us</a></li>
                 <li><a href="#login" class="about-btn scrollto">Login</a></li>
@@ -76,7 +78,7 @@
 <main id="main">
 
     <!-- ======= About Section ======= -->
-    <section id="about">
+    <section id="cookandhelper">
         <div class="container" data-aos="fade-up">
             <div class="row">
                 <div class="col-lg-6">
@@ -98,10 +100,11 @@
 
                 </div>
             </div>
+            </div>
     </section><!-- End About Section -->
 
     <!-- ======= Speakers Section ======= -->
-    <section id="speakers">
+    <section id="numbers">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>Counter Data</h2>
@@ -154,7 +157,7 @@
     </section><!-- End Speakers Section -->
 
     <!-- ======= Schedule Section ======= -->
-    <section id="schedule" class="section-with-bg">
+    <section id="menu" class="section-with-bg">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>Mess Menu</h2>
@@ -195,7 +198,7 @@
         </div>
 
     <!-- ======= Venue Section ======= -->
-    <section id="venue">
+    <section id="onoff">
         <div class="container-fluid" data-aos="fade-up">
             <div class="section-header">
                 <h2>Student mess ON/OFF status</h2>
@@ -231,6 +234,8 @@
                 </table>
             </div>
         </div>
+    </section>
+    <section id="payments">
         <div class="container-fluid" data-aos="fade-up">
             <div class="section-header">
                 <h2>Students Payment Status</h2>
@@ -268,6 +273,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        </section>
+        <section id="messtimings">
             <div class="section-header">
                 <h2>Mess Timings</h2>
                 <p>No one will be entertain without below timings</p>
@@ -300,8 +308,107 @@
                     </tbody>
                 </table>
             </div>
+        </section>
+
+        <section id="unitsdetails">
+            <div class="container-fluid" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Students Units Details</h2>
+                    <p>Detiled day by day units and total units are shown</p>
+                </div>
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-hover table-striped" style="font-size: small;overflow-x: scroll;">
+                        <thead>
+                        <tr style="height: fit-content;">
+                            <th scope="col">Name</th>
+                            <th scope="col">01</th>
+                            <th scope="col">02</th>
+                            <th scope="col">03</th>
+                            <th scope="col">04</th>
+                            <th scope="col">05</th>
+                            <th scope="col">06</th>
+                            <th scope="col">07</th>
+                            <th scope="col">08</th>
+                            <th scope="col">09</th>
+                            <th scope="col">10</th>
+                            <th scope="col">11</th>
+                            <th scope="col">12</th>
+                            <th scope="col">13</th>
+                            <th scope="col">14</th>
+                            <th scope="col">15</th>
+                            <th scope="col">16</th>
+                            <th scope="col">17</th>
+                            <th scope="col">18</th>
+                            <th scope="col">19</th>
+                            <th scope="col">20</th>
+                            <th scope="col">21</th>
+                            <th scope="col">22</th>
+                            <th scope="col">23</th>
+                            <th scope="col">24</th>
+                            <th scope="col">25</th>
+                            <th scope="col">26</th>
+                            <th scope="col">27</th>
+                            <th scope="col">28</th>
+                            <th scope="col">29</th>
+                            <th scope="col">30</th>
+                            <th scope="col">31</th>
+                            <th scope="col">Total Units</th>
 
 
+
+
+
+
+
+                            <th scope="col" colspan="2">Operations</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category: ${listCategories}">
+                            <td th:text="${category.categoryId}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td><a th:href="@{/showFormForUpdateCategory/{categoryId}(categoryId=${category.categoryId})}"
+                                   class="btn btn-primary btn-sm">Edit</a></td>
+                            <td><a th:href="@{/categories/deleteCategory/{id}(id=${category.categoryId})}"
+                                   class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
             <h1 style="margin-bottom: 80%"></h1>
         </div>
         <div class="row no-gutters">
@@ -493,7 +600,7 @@
     </section><!-- End Gallery Section -->
 
     <!-- ======= Supporters Section ======= -->
-    <section id="cookandhelper" class="section-with-bg">
+    <section id="gal" class="section-with-bg">
 
         <div class="container" data-aos="fade-up">
             <div class="section-header">
@@ -880,8 +987,8 @@
             </div>
 
         </div>
-    </section><!-- End Contact Section -->
-
+    </section>
+    </section>   <!-- End Contact Section -->
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
